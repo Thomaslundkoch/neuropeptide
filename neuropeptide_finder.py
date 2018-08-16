@@ -49,10 +49,10 @@ def find_neuropeptides_transcriptome(database, motifs, processing_site_threshold
     Written by TLK, 17.06.18"""
     title=''
     sequence=''
-    reverse_complement_sequence=reverse_complement(sequence)
     for line in database:
         line=line.replace('\n','')
         if line.startswith('>'):
+            reverse_complement_sequence=reverse_complement(sequence)
             for reading_frame in [translate(sequence),translate(sequence[1:]),translate(sequence[2:]),
             translate(reverse_complement_sequence),translate(reverse_complement_sequence[1:]),translate(reverse_complement_sequence[2:])]:
                 for open_reading_frame in reading_frame.split('*'):
