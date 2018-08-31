@@ -1,3 +1,9 @@
+# Additional file X: Program for identification of preprohormones in the transcriptomes from various cubomedusae
+# The script ‘neuropeptideFinder.py’ is written in Python3.
+# To apply it to the transcriptome, the relevant database should be connected to the script.
+
+
+
 def reverse_complement(sequence):
     """input: DNA string. output: reverse complement of DNA string
     Revised by TLK 18.07.18"""
@@ -59,7 +65,7 @@ def find_neuropeptides_transcriptome(database, motifs, processing_site_threshold
                     if len(open_reading_frame)>1500: #ignore proteins that are too long to encode prepropeptide
                         title=line
                         sequence=''
-                    elif 'GRGRGR' in open_reading_frame: #ignor repetitive motifs of GR's that are somewhat common
+                    elif 'GRGRGRGRGR' in open_reading_frame: #ignore repetitive motifs of GR's that are somewhat common
                         title=line
                         sequence=''
                     else:
@@ -72,3 +78,5 @@ def find_neuropeptides_transcriptome(database, motifs, processing_site_threshold
             sequence=''
         else:
             sequence+=line
+
+find_neuropeptides_transcriptome(database, ['GR','GKR','GKK'],7,5,80)
