@@ -79,4 +79,24 @@ def find_neuropeptides_transcriptome(database, motifs, processing_site_threshold
         else:
             sequence+=line
 
+def count_and_list(protein,motifs,threshold, peptide_length):
+    """"Input: protein is an amino acid sequence as a string
+    motifs is the processing sites to be counted
+    threshold is the number of motifs to be counted before it is accepted
+    Output: A tuple. (True/False,list of 7 AA long peptides located N-terminally to motifs/[])
+    depending on if the number of motifs reaches threshold
+    Written by TLK, 17.06.18"""
+    peptides=[]
+    count=0
+    for i in range(7,len(protein)):
+        for motif in motifs:
+            if protein[i:i+len(motif)]==motif:
+                count+=1
+                peptides.append(protein[i-peptide_length:i])
+    if count>threshold:
+        return((True,peptides))
+    else:
+        return((False,[]))            
+            
+            
 find_neuropeptides_transcriptome(database, ['GR','GKR','GKK'],7,5,80)
